@@ -1,0 +1,4 @@
+
+_G.botesp = true.lua
+_G.safeesp = true.lua
+local noblackout.lua
