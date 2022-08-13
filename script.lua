@@ -73,6 +73,32 @@ Main:AddSwitch("nextbot esp", function(nextbotsesp)
         end
     end
 end)
+_G.fullbright = false
+Main:AddSwitch("fullbright", function(fullbright)
+    _G.fullbright = fullbright
+    if _G.fullbright then
+        _G.Brightness = game:GetService("Lighting").Brightness
+		_G.ClockTime = game:GetService("Lighting").ClockTime
+		_G.FogEnd = game:GetService("Lighting").FogEnd
+		_G.GlobalShadows = game:GetService("Lighting").GlobalShadows
+		_G.OutdoorAmbient = game:GetService("Lighting").OutdoorAmbient
+    end
+    while _G.fullbright do
+        game:GetService("Lighting").Brightness = 2
+		game:GetService("Lighting").ClockTime = 14
+		game:GetService("Lighting").FogEnd = 100000
+		game:GetService("Lighting").GlobalShadows = false
+		game:GetService("Lighting").OutdoorAmbient = Color3.fromRGB(128, 128, 128)
+        game:GetService("RunService").RenderStepped:Wait()
+    end
+    if _G.fullbright == false then
+        game:GetService("Lighting").Brightness = _G.Brightness
+		game:GetService("Lighting").ClockTime = _G.ClockTime
+		game:GetService("Lighting").FogEnd = _G.FogEnd
+		game:GetService("Lighting").GlobalShadows = _G.GlobalShadows
+		game:GetService("Lighting").OutdoorAmbient = _G.OutdoorAmbient
+    end
+end)
 if game:GetService("CoreGui"):FindFirstChild("modalGui") == nil then
     local screenGui = Instance.new("ScreenGui", game:GetService("CoreGui"))
     screenGui.Name = "modalGui"
