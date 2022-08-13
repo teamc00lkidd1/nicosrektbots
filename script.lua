@@ -160,10 +160,39 @@ Main:AddSwitch("autofarm", function(autofarm)
         if _G.autofarm == false then game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = _G.originalcframe end
     end
 end)
+_G.fakeadmin = false
+local fakeadminswitch = Main:AddSwitch("fake admin", function(fakeadmin)
+    _G.fakeadmin = fakeadmin
+    while _G.fakeadmin do
+        if game:GetService("Players").LocalPlayer.PlayerGui.event.Header.Text == "blackout" then
+            game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("/blackout", "All")
+            fakeadminswitch:Set(false)
+        end
+        wait()
+    end
+end)
+local GC = getconnections or get_signal_cons
+if GC then
+    for i,v in pairs(GC(game:GetService("Players").LocalPlayer.Idled)) do
+        if v["Disable"] then
+            v["Disable"](v)
+        elseif v["Disconnect"] then
+            v["Disconnect"](v)
+        end
+    end
+else
+    game:GetService("Players").LocalPlayer.Idled:connect(function()
+        local VirtualUser = game:GetService("VirtualUser")
+        VirtualUser:CaptureController()
+        VirtualUser:ClickButton2(Vector2.new())
+    end)
+end
 while wait(1) do
     for i, bot in pairs(workspace.bots:GetChildren()) do
         if killedbylist[bot.Name] == nil and bot:FindFirstChild("hitbox") ~= nil and bot:FindFirstChild("hitbox"):FindFirstChild("TouchInterest") ~= nil then
             killedbylist[bot.Name] = killedby:Add(bot.Name)
+        elseif (bot:FindFirstChild("Hitbox") == nil and killedbylist[bot.Name]) or (bot:FindFirstChild("hitbox"):FindFirstChild("TouchInterest") == nil and killedbylist[bot.Name]) then
+            killedbylist[bot.Name][1]:Destroy()
         end
     end
 end
