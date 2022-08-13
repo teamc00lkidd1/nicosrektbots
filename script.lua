@@ -165,8 +165,8 @@ local fakeadminswitch = Main:AddSwitch("fake admin", function(fakeadmin)
     _G.fakeadmin = fakeadmin
     while _G.fakeadmin do
         if game:GetService("Players").LocalPlayer.PlayerGui.event.Header.Text == "blackout" then
-            game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("/blackout", "All")
             fakeadminswitch:Set(false)
+            game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("/blackout", "All")
         end
         wait()
     end
