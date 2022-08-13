@@ -1,6 +1,6 @@
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/lolpippiou/nicosrektbots/main/ui-engine.lua"))()
 
-local name = "nico's rektbots"
+local name = "nico's rektbots (beta)"
 
 if identifyexecutor then
     name = name.." - "..string.lower(identifyexecutor())
@@ -73,11 +73,19 @@ Main:AddSwitch("nextbot esp", function(nextbotsesp)
         end
     end
 end)
-local plrGui = game.CoreGui
-local screenGui = Instance.new("ScreenGui", plrGui)
-local txtButton = Instance.new("TextButton")
-txtButton.BackgroundTransparency = 1
-txtButton.Size = UDim2.new(0, 0, 0, 0)
-txtButton.Text = " "
-txtButton.Modal = true
-txtButton.Parent = screenGui
+if game:GetService("CoreGui"):FindFirstChild("modalGui") == nil then
+    local screenGui = Instance.new("ScreenGui", game:GetService("CoreGui"))
+    screenGui.Name = "modalGui"
+    local txtButton = Instance.new("TextButton")
+    txtButton.BackgroundTransparency = 1
+    txtButton.Size = UDim2.new(0, 0, 0, 0)
+    txtButton.Text = " "
+    txtButton.Modal = true
+    txtButton.Parent = screenGui
+    local UIS = game:GetService("UserInputService")
+    UIS.InputBegan:connect(function(input)
+        if input.KeyCode == Enum.KeyCode.RightShift then
+            txtButton.Modal = not txtButton.Modal
+        end
+    end)
+end
