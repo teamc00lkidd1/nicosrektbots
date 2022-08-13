@@ -38,6 +38,22 @@ Main:AddSwitch("safezone esp", function(safezoneesp)
         end
     end
 end)
+if _G.gamering then _G.gamering:Disconnect() end
+if game:GetService("CoreGui"):FindFirstChild("modalGui") ~= nil then game:GetService("CoreGui"):FindFirstChild("modalGui"):Destroy() end
+local screenGui = Instance.new("ScreenGui", game:GetService("CoreGui"))
+screenGui.Name = "modalGui"
+local txtButton = Instance.new("TextButton")
+txtButton.BackgroundTransparency = 1
+txtButton.Size = UDim2.new(0, 0, 0, 0)
+txtButton.Text = ""
+txtButton.Modal = true
+txtButton.Parent = screenGui
+local UIS = game:GetService("UserInputService")
+_G.gamering = UIS.InputBegan:connect(function(input)
+    if input.KeyCode == Enum.KeyCode.RightShift then
+        txtButton.Modal = not txtButton.Modal
+    end
+end)
 _G.nextbotsesp = false
 Main:AddSwitch("nextbot esp", function(nextbotsesp)
     _G.nextbotsesp = nextbotsesp
@@ -132,17 +148,3 @@ while wait(1) do
         end
     end
 end
-local screenGui = Instance.new("ScreenGui", game:GetService("CoreGui"))
-screenGui.Name = "modalGui"
-local txtButton = Instance.new("TextButton")
-txtButton.BackgroundTransparency = 1
-txtButton.Size = UDim2.new(0, 0, 0, 0)
-txtButton.Text = " "
-txtButton.Modal = true
-txtButton.Parent = screenGui
-local UIS = game:GetService("UserInputService")
-_G.InputBeganMovementMoment = UIS.InputBegan:connect(function(input)
-    if input.KeyCode == Enum.KeyCode.RightShift then
-        txtButton.Modal = not txtButton.Modal
-    end
-end)
