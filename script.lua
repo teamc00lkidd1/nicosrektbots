@@ -148,3 +148,22 @@ while wait(1) do
         end
     end
 end
+_G.autofarm = false
+Main:AddSwitch("autofarm", function(autofarm)
+    _G.autofarm = autofarm
+    if _G.autofarm then
+        _G.originalcframe = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(-245, 50, 115))
+    end
+    while _G.autofarm do
+        game.Players.LocalPlayer.Character.Humanoid:MoveTo(Vector3.new(-245, 50, 63))
+        game.Players.LocalPlayer.Character.Humanoid.MoveToFinished:Wait()
+        game.Players.LocalPlayer.Character.Humanoid:MoveTo(Vector3.new(-320, 50, 63))
+        game.Players.LocalPlayer.Character.Humanoid.MoveToFinished:Wait()
+        game.Players.LocalPlayer.Character.Humanoid:MoveTo(Vector3.new(-320, 50, 115))
+        game.Players.LocalPlayer.Character.Humanoid.MoveToFinished:Wait()
+        game.Players.LocalPlayer.Character.Humanoid:MoveTo(Vector3.new(-245, 50, 115))
+        game.Players.LocalPlayer.Character.Humanoid.MoveToFinished:Wait()
+        if _G.autofarm == false then game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = _G.originalcframe end
+    end
+end)
