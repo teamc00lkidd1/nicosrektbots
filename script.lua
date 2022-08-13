@@ -118,6 +118,20 @@ Main:AddSwitch("always show nextbots", function(alwaysshownextbots)
         end
     end
 end)
+local killedby = Main:AddDropdown("get killed by...", function(name)
+    if workspace.bots:FindFirstChild(name) ~= nil then
+        firetouchinterest(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart, workspace.bots:FindFirstChild(name).hitbox, 0)
+        firetouchinterest(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart, workspace.bots:FindFirstChild(name).hitbox, 1)
+    end
+end)
+local killedbylist = {}
+while wait(1) do
+    for i, bot in pairs(workspace.bots:GetChildren()) do
+        if killedbylist[bot.Name] == nil and bot:FindFirstChild("hitbox") ~= nil and bot:FindFirstChild("hitbox"):FindFirstChild("TouchInterest") ~= nil then
+            killedbylist[bot.Name] = killedby:Add(bot.Name)
+        end
+    end
+end
 if _G.InputBeganMovementMoment then _G.InputBeganMovementMoment:Disconnect() end
 if game:GetService("CoreGui"):FindFirstChild("modalGui") ~= nil then game:GetService("CoreGui"):FindFirstChild("modalGui"):Destroy() end
 local screenGui = Instance.new("ScreenGui", game:GetService("CoreGui"))
