@@ -99,6 +99,25 @@ Main:AddSwitch("fullbright", function(fullbright)
 		game:GetService("Lighting").OutdoorAmbient = _G.OutdoorAmbient
     end
 end)
+_G.alwaysshownextbots = false
+Main:AddSwitch("always show nextbots", function(alwaysshownextbots)
+    _G.alwaysshownextbots = alwaysshownextbots
+    while _G.alwaysshownextbots do
+        for i, v in pairs(workspace.bots:GetChildren()) do
+            if v:FindFirstChild("HumanoidRootPart") ~= nil and v:FindFirstChild("HumanoidRootPart"):FindFirstChild("icon") ~= nil then
+                v:FindFirstChild("HumanoidRootPart"):FindFirstChild("icon").AlwaysOnTop = true
+            end
+        end
+        wait(1)
+    end
+    if _G.alwaysshownextbots == false then
+        for i, v in pairs(workspace.bots:GetChildren()) do
+            if v:FindFirstChild("HumanoidRootPart") ~= nil and v:FindFirstChild("HumanoidRootPart"):FindFirstChild("icon") ~= nil then
+                v:FindFirstChild("HumanoidRootPart"):FindFirstChild("icon").AlwaysOnTop = false
+            end
+        end
+    end
+end)
 if _G.InputBeganMovementMoment then _G.InputBeganMovementMoment:Disconnect() end
 if game:GetService("CoreGui"):FindFirstChild("modalGui") ~= nil then game:GetService("CoreGui"):FindFirstChild("modalGui"):Destroy() end
 local screenGui = Instance.new("ScreenGui", game:GetService("CoreGui"))
