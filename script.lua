@@ -99,6 +99,7 @@ Main:AddSwitch("fullbright", function(fullbright)
 		game:GetService("Lighting").OutdoorAmbient = _G.OutdoorAmbient
     end
 end)
+if _G.InputBeganMovementMoment then _G.InputBeganMovementMoment:Disconnect() end
 if game:GetService("CoreGui"):FindFirstChild("modalGui") ~= nil then game:GetService("CoreGui"):FindFirstChild("modalGui"):Destroy() end
 local screenGui = Instance.new("ScreenGui", game:GetService("CoreGui"))
 screenGui.Name = "modalGui"
@@ -109,7 +110,7 @@ txtButton.Text = " "
 txtButton.Modal = true
 txtButton.Parent = screenGui
 local UIS = game:GetService("UserInputService")
-UIS.InputBegan:connect(function(input)
+_G.InputBeganMovementMoment = UIS.InputBegan:connect(function(input)
     if input.KeyCode == Enum.KeyCode.RightShift then
         txtButton.Modal = not txtButton.Modal
     end
