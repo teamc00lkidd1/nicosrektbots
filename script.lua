@@ -132,8 +132,6 @@ while wait(1) do
         end
     end
 end
-if _G.InputBeganMovementMoment then _G.InputBeganMovementMoment:Disconnect() end
-if game:GetService("CoreGui"):FindFirstChild("modalGui") ~= nil then game:GetService("CoreGui"):FindFirstChild("modalGui"):Destroy() end
 local screenGui = Instance.new("ScreenGui", game:GetService("CoreGui"))
 screenGui.Name = "modalGui"
 local txtButton = Instance.new("TextButton")
