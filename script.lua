@@ -141,13 +141,6 @@ local killedby = Main:AddDropdown("get killed by...", function(name)
     end
 end)
 local killedbylist = {}
-while wait(1) do
-    for i, bot in pairs(workspace.bots:GetChildren()) do
-        if killedbylist[bot.Name] == nil and bot:FindFirstChild("hitbox") ~= nil and bot:FindFirstChild("hitbox"):FindFirstChild("TouchInterest") ~= nil then
-            killedbylist[bot.Name] = killedby:Add(bot.Name)
-        end
-    end
-end
 _G.autofarm = false
 Main:AddSwitch("autofarm", function(autofarm)
     _G.autofarm = autofarm
@@ -167,3 +160,10 @@ Main:AddSwitch("autofarm", function(autofarm)
         if _G.autofarm == false then game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = _G.originalcframe end
     end
 end)
+while wait(1) do
+    for i, bot in pairs(workspace.bots:GetChildren()) do
+        if killedbylist[bot.Name] == nil and bot:FindFirstChild("hitbox") ~= nil and bot:FindFirstChild("hitbox"):FindFirstChild("TouchInterest") ~= nil then
+            killedbylist[bot.Name] = killedby:Add(bot.Name)
+        end
+    end
+end
