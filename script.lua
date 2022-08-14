@@ -161,13 +161,14 @@ Main:AddSwitch("autofarm", function(autofarm)
     end
 end)
 _G.fakeadmin = false
-Main:AddSwitch("fake admin", function(fakeadmin)
+Main:AddSwitch("fake admin (enable before blackout)", function(fakeadmin)
     _G.fakeadmin = fakeadmin
     while _G.fakeadmin do
         if game:GetService("Players").LocalPlayer.PlayerGui.event.Header.Text == "blackout" then
             game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("/blackout", "All")
             _G.fakeadmin = false
             repeat wait() until game:GetService("Players").LocalPlayer.PlayerGui.event.Header.Text == ""
+            _G.fakeadmin = true
         end
         wait()
     end
