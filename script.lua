@@ -89,6 +89,30 @@ Main:AddSwitch("nextbot esp", function(nextbotsesp)
         end
     end
 end)
+_G.powerboxesp = false
+Main:AddSwitch("powerbox esp", function(powerboxesp)
+    _G.powerboxesp = powerboxesp
+    while _G.powerboxesp do
+        for i, v in pairs(workspace.PowerBox:GetChildren()) do
+            local a = Instance.new("BoxHandleAdornment", v)
+            a.Name = "powerESP by popbob#1483"
+            a.Size = v.Size
+            a.Adornee = v
+            a.AlwaysOnTop = true
+            a.ZIndex = 10
+            a.Transparency = 0.3
+            a.Color = BrickColor.new("Dark orange")
+        end
+        wait(1)
+    end
+    if _G.powerboxesp == false then
+        for i, v in pairs(workspace.PowerBox:GetChildren()) do
+            if v:FindFirstChild("powerESP by popbob#1483") ~= nil then
+                v:FindFirstChild("powerESP by popbob#1483"):Destroy()
+            end
+        end
+    end
+end)
 _G.fullbright = false
 Main:AddSwitch("fullbright", function(fullbright)
     _G.fullbright = fullbright
@@ -133,6 +157,12 @@ Main:AddSwitch("always show nextbots", function(alwaysshownextbots)
             end
         end
     end
+end)
+Main:AddButton("toggle tunnel2 gates", function()
+    fireproximityprompt(workspace.map.tunnel2.unit["garage_button"].ProximityPrompt)
+end)
+Main:AddButton("toggle parking tunnel gates", function()
+    fireproximityprompt(workspace.map["parking_lot_all"]["parking_tunnel"].unit.garage_button.ProximityPrompt)
 end)
 local killedby = Main:AddDropdown("get killed by...", function(name)
     if workspace.bots:FindFirstChild(name) ~= nil then
