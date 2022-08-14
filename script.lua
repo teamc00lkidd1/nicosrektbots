@@ -159,10 +159,20 @@ Main:AddSwitch("always show nextbots", function(alwaysshownextbots)
     end
 end)
 Main:AddButton("toggle tunnel2 gates", function()
+    local oldcframe = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame
+    game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.map.tunnel2.unit["garage_button"].CFrame
+    wait(0.25)
     fireproximityprompt(workspace.map.tunnel2.unit["garage_button"].ProximityPrompt)
+    wait(0.25)
+    game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = oldcframe
 end)
 Main:AddButton("toggle parking tunnel gates", function()
+    local oldcframe = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame
+    game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.map["parking_lot_all"]["parking_tunnel"].unit.garage_button.CFrame
+    wait(0.25)
     fireproximityprompt(workspace.map["parking_lot_all"]["parking_tunnel"].unit.garage_button.ProximityPrompt)
+    wait(0.25)
+    game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = oldcframe
 end)
 local killedby = Main:AddDropdown("get killed by...", function(name)
     if workspace.bots:FindFirstChild(name) ~= nil then
