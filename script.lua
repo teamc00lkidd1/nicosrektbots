@@ -94,14 +94,16 @@ Main:AddSwitch("powerbox esp", function(powerboxesp)
     _G.powerboxesp = powerboxesp
     while _G.powerboxesp do
         for i, v in pairs(workspace.PowerBox:GetChildren()) do
-            local a = Instance.new("BoxHandleAdornment", v)
-            a.Name = "powerESP by popbob#1483"
-            a.Size = v.Size
-            a.Adornee = v
-            a.AlwaysOnTop = true
-            a.ZIndex = 10
-            a.Transparency = 0.3
-            a.Color = BrickColor.new("Dark orange")
+            if v:FindFirstChildOfClass("ProximityPrompt") then
+                local a = Instance.new("BoxHandleAdornment", v)
+                a.Name = "powerESP by popbob#1483"
+                a.Size = v.Size
+                a.Adornee = v
+                a.AlwaysOnTop = true
+                a.ZIndex = 10
+                a.Transparency = 0.3
+                a.Color = BrickColor.new("Dark orange")
+            end
         end
         wait(1)
     end
