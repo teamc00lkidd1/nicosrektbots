@@ -192,7 +192,7 @@ while wait(1) do
         if killedbylist[bot.Name] == nil and bot:FindFirstChild("hitbox") ~= nil and bot:FindFirstChild("hitbox"):FindFirstChild("TouchInterest") ~= nil then
             killedbylist[bot.Name] = killedby:Add(bot.Name)
         elseif (bot:FindFirstChild("Hitbox") == nil and killedbylist[bot.Name]) or (bot:FindFirstChild("hitbox"):FindFirstChild("TouchInterest") == nil and killedbylist[bot.Name]) then
-            killedbylist[bot.Name][1]:Destroy()
+            killedbylist[bot.Name]:Destroy()
         end
     end
 end
