@@ -140,6 +140,7 @@ local killedby = Main:AddDropdown("get killed by...", function(name)
         firetouchinterest(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart, workspace.bots:FindFirstChild(name).hitbox, 1)
     end
 end)
+local killedbylist = {}
 _G.autofarm = false
 Main:AddSwitch("autofarm", function(autofarm)
     _G.autofarm = autofarm
@@ -191,7 +192,7 @@ end
 while wait(1) do
     for i, bot in pairs(workspace.bots:GetChildren()) do
         if killedbylist[bot.Name] == nil and bot:FindFirstChild("hitbox") ~= nil and bot:FindFirstChild("hitbox"):FindFirstChild("TouchInterest") ~= nil then
-            killedby:Add(bot.Name)
+            killedbylist[bot.Name] = killedby:Add(bot.Name)
         end
     end
 end
