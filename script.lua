@@ -161,12 +161,13 @@ Main:AddSwitch("autofarm", function(autofarm)
     end
 end)
 _G.fakeadmin = false
-local fakeadminswitch = Main:AddSwitch("fake admin", function(fakeadmin)
+Main:AddSwitch("fake admin", function(fakeadmin)
     _G.fakeadmin = fakeadmin
     while _G.fakeadmin do
         if game:GetService("Players").LocalPlayer.PlayerGui.event.Header.Text == "blackout" then
-            fakeadminswitch:Set(false)
             game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("/blackout", "All")
+            _G.fakeadmin = false
+            repeat wait() until game:GetService("Players").LocalPlayer.PlayerGui.event.Header.Text == ""
         end
         wait()
     end
@@ -191,8 +192,9 @@ while wait(1) do
     for i, bot in pairs(workspace.bots:GetChildren()) do
         if killedbylist[bot.Name] == nil and bot:FindFirstChild("hitbox") ~= nil and bot:FindFirstChild("hitbox"):FindFirstChild("TouchInterest") ~= nil then
             killedbylist[bot.Name] = killedby:Add(bot.Name)
-        elseif (bot:FindFirstChild("Hitbox") == nil and killedbylist[bot.Name] ~= nil) or (bot:FindFirstChild("hitbox"):FindFirstChild("TouchInterest") == nil and killedbylist[bot.Name] ~= nil) then
-            killedbylist[bot.Name]:Destroy()
+            print(killedbylist[bot.Name])
+        elseif killedbylist[bot.Name] ~= nil and bot:FindFirstChild("hitbox") == nil then
+            killedbylist[bot.Name]:Remove()
         end
     end
 end
