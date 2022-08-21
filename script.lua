@@ -100,6 +100,7 @@ Main:AddSwitch("powerbox esp", function(powerboxesp)
     _G.powerboxesp = powerboxesp
     while _G.powerboxesp do
         for i, v in pairs(workspace.PowerBox:GetChildren()) do
+            print()
             if v:FindFirstChildOfClass("ProximityPrompt") ~= nil and v:FindFirstChildOfClass("ProximityPrompt").Enabled == true and v:FindFirstChild("powerESP by popbob#1483") == nil then
                 local a = Instance.new("BoxHandleAdornment", v)
                 a.Name = "powerESP by popbob#1483"
@@ -109,7 +110,7 @@ Main:AddSwitch("powerbox esp", function(powerboxesp)
                 a.ZIndex = 10
                 a.Transparency = 0.3
                 a.Color = BrickColor.new("Dark orange")
-            elseif v:FindFirstChild("powerESP by popbob#1483") ~= nil and v:FindFirstChildOfClass("ProximityPrompt").Enabled == false or v:FindFirstChildOfClass("ProximityPrompt") == nil then
+            elseif (v:FindFirstChildOfClass("ProximityPrompt").Enabled == false and v:FindFirstChild("powerESP by popbob#1483") ~= nil) or (v:FindFirstChildOfClass("ProximityPrompt") == nil and v:FindFirstChild("powerESP by popbob#1483") ~= nil) then
                 v:FindFirstChild("powerESP by popbob#1483"):Destroy()
             end
         end
