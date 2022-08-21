@@ -4,7 +4,7 @@ local name = "nibba what this game"
 if game.PlaceId == 10118559731 then
     name = "nico's rektbots"
 elseif game.PlaceId == 10332948375 then
-    name = "nico's rekting (nico's testing version)"
+    name = "nico's rekting"
 end
 --local name = "nico's rektbots (beta)"
 
