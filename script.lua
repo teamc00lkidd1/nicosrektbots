@@ -1,6 +1,12 @@
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/lolpippiou/nicosrektbots/main/ui-engine.lua"))()
 
-local name = "nico's rektbots (beta)"
+local name = "nibba what this game"
+if game.PlaceId == 10118559731 then
+    name = "nico's rektbots"
+elseif game.PlaceId == 10332948375 then
+    name = "nico's rekting (nico's testing version)"
+end
+--local name = "nico's rektbots (beta)"
 
 if identifyexecutor then
     name = name.." - "..string.lower(identifyexecutor())
