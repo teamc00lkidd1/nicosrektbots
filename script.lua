@@ -109,7 +109,7 @@ Main:AddSwitch("powerbox esp", function(powerboxesp)
                 a.ZIndex = 10
                 a.Transparency = 0.3
                 a.Color = BrickColor.new("Dark orange")
-            elseif v:FindFirstChildOfClass("ProximityPrompt") == nil and v:FindFirstChild("powerESP by popbob#1483") ~= nil then
+            elseif v:FindFirstChild("powerESP by popbob#1483") ~= nil and v:FindFirstChildOfClass("ProximityPrompt").Enabled == false or v:FindFirstChildOfClass("ProximityPrompt") == nil then
                 v:FindFirstChild("powerESP by popbob#1483"):Destroy()
             end
         end
